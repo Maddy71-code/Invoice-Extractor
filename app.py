@@ -41,7 +41,7 @@ def logged_in():
 def login():
     error = None
     if request.method == 'POST':
-        data = request.get_json() or request.form
+        data = request.form if request.form else (request.get_json() or {})
         u = User.query.filter_by(username=data.get('username')).first()
         if u and u.check_password(data.get('password', '')):
             session['user_id'] = u.id
@@ -184,3 +184,4 @@ def admin():
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
