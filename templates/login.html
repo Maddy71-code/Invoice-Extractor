@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Invoice Extractor — Login</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;background:#f0ede8;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:16px;padding:36px 40px;width:380px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.brand{font-size:22px;font-weight:700;margin-bottom:4px}
+.sub{font-size:13px;color:#888;margin-bottom:28px}
+.fg{margin-bottom:16px}
+label{font-size:12px;font-weight:600;color:#666;display:block;margin-bottom:5px}
+input{width:100%;padding:10px 13px;font-size:14px;border:1px solid #ddd;border-radius:9px;font-family:inherit;transition:border .15s}
+input:focus{outline:none;border-color:#1a1a1a}
+.btn{width:100%;padding:11px;border-radius:9px;border:none;background:#1a1a1a;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px}
+.btn:hover{background:#333}
+.err{background:#fde8e8;border:1px solid #f7c1c1;color:#8b1a1a;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">Invoice Extractor</div>
+  <div class="sub">Sign in to continue</div>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  <form method="POST" action="/login">
+    <div class="fg"><label>Username</label><input name="username" type="text" placeholder="Enter username" autofocus required/></div>
+    <div class="fg"><label>Password</label><input name="password" type="password" placeholder="Enter password" required/></div>
+    <button class="btn" type="submit">Sign in →</button>
+  </form>
+</div>
+</body>
+</html>
