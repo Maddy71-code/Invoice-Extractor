@@ -8,7 +8,9 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'change-this-in-production-xyz987')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///app.db').replace('postgres://', 'postgresql://')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
+app.config['PERMANENT_SESSION_LIFETIME'] = 86400 * 7
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 db = SQLAlchemy(app)
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
@@ -47,6 +49,7 @@ def login():
             session['user_id'] = u.id
             session['username'] = u.username
             session['role'] = u.role
+            session.permanent = True
             return redirect('/')
         error = 'Invalid username or password'
     return render_template('login.html', error=error)
